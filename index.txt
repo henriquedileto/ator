@@ -31,11 +31,9 @@
       content:"";
       position:fixed;
       inset:0;
-
       background:
       radial-gradient(circle at top left, rgba(255,255,255,0.04), transparent 30%),
       radial-gradient(circle at bottom right, rgba(120,0,0,0.18), transparent 40%);
-
       z-index:-2;
       pointer-events:none;
     }
@@ -66,6 +64,12 @@
       backdrop-filter:blur(14px);
       background:rgba(0,0,0,0.35);
       border-bottom:1px solid rgba(255,255,255,0.08);
+      transition:0.4s;
+    }
+
+    header.hide-header{
+      transform:translateY(-120%);
+      opacity:0;
     }
 
     .header-content{
@@ -120,28 +124,17 @@
 
     /* MENU MOBILE */
 
-    .menu-toggle{
-      display:none;
-      background:rgba(255,255,255,0.06);
-      border:1px solid rgba(255,255,255,0.12);
-      color:white;
-      padding:10px 14px;
-      border-radius:14px;
-      font-size:1.2rem;
-      cursor:pointer;
-    }
-
     .mobile-menu{
       position:fixed;
       top:0;
       right:-100%;
       width:280px;
       height:100vh;
-      background:rgba(0,0,0,0.92);
-      backdrop-filter:blur(18px);
+      background:rgba(0,0,0,0.88);
+      backdrop-filter:blur(22px);
       border-left:1px solid rgba(255,255,255,0.08);
       z-index:9999;
-      padding:30px 22px;
+      padding:30px 20px;
       transition:0.4s;
       display:flex;
       flex-direction:column;
@@ -153,12 +146,12 @@
     }
 
     .mobile-menu a{
-      font-size:0.85rem;
+      font-size:0.78rem;
       text-transform:uppercase;
       letter-spacing:0.2em;
-      padding:12px 10px;
-      border-radius:14px;
-      background:rgba(255,255,255,0.03);
+      padding:14px 14px;
+      border-radius:16px;
+      background:rgba(255,255,255,0.02);
       border:1px solid rgba(255,255,255,0.06);
     }
 
@@ -168,9 +161,9 @@
 
     .mobile-menu .close-btn{
       margin-bottom:10px;
-      font-size:1.8rem;
+      font-size:1.6rem;
       cursor:pointer;
-      opacity:0.8;
+      opacity:0.7;
     }
 
     .mobile-menu .close-btn:hover{
@@ -189,17 +182,46 @@
       display:block;
     }
 
+    /* BOTÃO FLUTUANTE PREMIUM */
+
+    .floating-menu-btn{
+      display:none;
+      position:fixed;
+      top:18px;
+      right:18px;
+      z-index:99999;
+
+      width:54px;
+      height:54px;
+      border-radius:18px;
+
+      background:rgba(0,0,0,0.55);
+      border:1px solid rgba(255,255,255,0.12);
+      backdrop-filter:blur(16px);
+
+      color:white;
+      font-size:1.5rem;
+
+      cursor:pointer;
+      transition:0.3s;
+      opacity:0;
+      pointer-events:none;
+    }
+
+    .floating-menu-btn:hover{
+      background:rgba(0,0,0,0.75);
+      transform:scale(1.05);
+    }
+
     @media(max-width:850px){
       nav{
         display:none;
       }
 
-      .menu-toggle{
-        display:block;
-      }
-
-      .header-content{
-        flex-direction:row;
+      .floating-menu-btn{
+        display:flex;
+        align-items:center;
+        justify-content:center;
       }
     }
 
@@ -372,7 +394,7 @@
       letter-spacing:-0.05em;
     }
 
-    /* SOBRE (MOBILE MELHOR) */
+    /* SOBRE */
 
     .about{
       display:grid;
@@ -432,7 +454,7 @@
       line-height:1.4;
     }
 
-    /* EXPERIÊNCIA (MAIS COMPACTO) */
+    /* EXPERIÊNCIA */
 
     .experience-grid{
       display:grid;
@@ -518,7 +540,7 @@
       font-size:0.9rem;
     }
 
-    /* GALERIA (THUMBNAILS MENORES) */
+    /* GALERIA */
 
     .gallery-grid{
       display:grid;
@@ -559,6 +581,7 @@
       align-items:center;
       z-index:9999;
       padding:20px;
+      touch-action:pan-y;
     }
 
     .lightbox.active{
@@ -569,14 +592,6 @@
       position:relative;
       max-width:1000px;
       width:100%;
-    }
-
-    .lightbox-content img{
-      width:100%;
-      max-height:85vh;
-      object-fit:contain;
-      border-radius:18px;
-      border:1px solid rgba(255,255,255,0.12);
     }
 
     .lightbox-close{
@@ -618,7 +633,58 @@
       }
     }
 
-    /* VIDEOS GRID MENOR */
+    /* CONTADOR LIGHTBOX */
+
+    .lightbox-counter{
+      position:absolute;
+      top:-48px;
+      left:0;
+      font-size:0.9rem;
+      letter-spacing:0.12em;
+      text-transform:uppercase;
+      color:rgba(255,255,255,0.75);
+      background:rgba(255,255,255,0.06);
+      border:1px solid rgba(255,255,255,0.10);
+      backdrop-filter:blur(14px);
+      padding:10px 16px;
+      border-radius:999px;
+    }
+
+    /* SLIDE SUAVE LIGHTBOX */
+
+    .lightbox-slider{
+      width:100%;
+      overflow:hidden;
+      border-radius:18px;
+    }
+
+    .lightbox-slider img{
+      width:100%;
+      max-height:85vh;
+      object-fit:contain;
+      border-radius:18px;
+      border:1px solid rgba(255,255,255,0.12);
+      user-select:none;
+      -webkit-user-drag:none;
+      transition:transform 0.45s ease, opacity 0.45s ease;
+    }
+
+    .lightbox-slider img.slide-out-left{
+      transform:translateX(-60px);
+      opacity:0;
+    }
+
+    .lightbox-slider img.slide-out-right{
+      transform:translateX(60px);
+      opacity:0;
+    }
+
+    .lightbox-slider img.slide-in{
+      transform:translateX(0px);
+      opacity:1;
+    }
+
+    /* VIDEOS */
 
     .video-grid{
       display:grid;
@@ -707,39 +773,117 @@
       line-height: 1.4;
     }
 
-    /* CONTATO */
+    /* CONTATO PREMIUM COM SVG */
 
-    .contact-box{
-      text-align:center;
+    .contact-row{
+      display:flex;
+      justify-content:center;
+      gap:18px;
+      flex-wrap:wrap;
+      margin-bottom:30px;
+    }
+
+    .contact-item{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      padding:14px 18px;
+      border-radius:999px;
       background:rgba(255,255,255,0.04);
-      border:1px solid rgba(255,255,255,0.08);
-      border-radius:30px;
-      padding:60px;
+      border:1px solid rgba(255,255,255,0.10);
+      backdrop-filter:blur(12px);
+      transition:0.3s;
     }
 
-    .contact-box p{
-      margin-bottom:18px;
-      color:#d0d0d0;
-      font-size:1.05rem;
+    .contact-item:hover{
+      background:rgba(255,255,255,0.08);
+      transform:translateY(-2px);
     }
+
+    .contact-icon{
+      width:22px;
+      height:22px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+
+    .contact-icon svg{
+      width:22px;
+      height:22px;
+      fill:rgba(255,255,255,0.85);
+    }
+
+    .contact-text{
+      font-size:0.95rem;
+      color:rgba(255,255,255,0.85);
+      word-break:break-word;
+    }
+
+    /* SOCIAL LINKS COM ÍCONES SVG */
 
     .socials{
       margin-top:35px;
       display:flex;
       justify-content:center;
-      gap:16px;
+      gap:14px;
       flex-wrap:wrap;
     }
 
-    .socials a{
-      padding:14px 22px;
+    .social-link{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      padding:14px 20px;
       border-radius:999px;
-      border:1px solid rgba(255,255,255,0.1);
+      border:1px solid rgba(255,255,255,0.10);
+      background:rgba(255,255,255,0.03);
+      backdrop-filter:blur(12px);
       transition:0.3s;
+      font-size:0.85rem;
+      letter-spacing:0.08em;
+      text-transform:uppercase;
+      color:rgba(255,255,255,0.85);
     }
 
-    .socials a:hover{
+    .social-link:hover{
       background:rgba(255,255,255,0.08);
+      transform:translateY(-2px);
+    }
+
+    .social-icon{
+      width:18px;
+      height:18px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+
+    .social-icon svg{
+      width:18px;
+      height:18px;
+      fill:rgba(255,255,255,0.85);
+    }
+
+    @media(max-width:600px){
+
+      .contact-row{
+        flex-direction:column;
+        align-items:center;
+        gap:14px;
+      }
+
+      .contact-item{
+        width:100%;
+        max-width:360px;
+        justify-content:center;
+        text-align:center;
+      }
+
+      .contact-text{
+        font-size:0.9rem;
+      }
+
     }
 
     /* FOOTER */
@@ -810,7 +954,8 @@
     <div class="container header-content">
 
       <div class="logo">
-        <h1>Henrique Dileto | Ator</h1>
+        <h1>Henrique Dileto</h1>
+        <p>Ator</p>
       </div>
 
       <nav>
@@ -822,14 +967,17 @@
         <a href="#contato">Contato</a>
       </nav>
 
-      <button class="menu-toggle" onclick="openMenu()">☰</button>
-
     </div>
 
   </header>
 
+  <!-- BOTÃO FLUTUANTE PREMIUM -->
+  <button class="floating-menu-btn" id="floatingBtn" onclick="openMenu()">☰</button>
+
+  <!-- OVERLAY -->
   <div class="menu-overlay" id="menuOverlay" onclick="closeMenu()"></div>
 
+  <!-- MENU MOBILE -->
   <div class="mobile-menu" id="mobileMenu">
 
     <div class="close-btn" onclick="closeMenu()">✕</div>
@@ -839,7 +987,7 @@
     <a href="#curriculo" onclick="closeMenu()">Experiência</a>
     <a href="#galeria" onclick="closeMenu()">Galeria</a>
     <a href="#videos" onclick="closeMenu()">Vídeos</a>
-    <a href="#Fale Comigo" onclick="closeMenu()">Fale Comigo</a>
+    <a href="#contato" onclick="closeMenu()">Contato</a>
 
   </div>
 
@@ -869,7 +1017,7 @@
 
       <div class="hero-text">
 
-        <small>Portfólio Artístico de </small>
+        <small>Portfólio Artístico</small>
 
         <h2>
           Henrique<br>
@@ -916,6 +1064,7 @@
     <div class="container">
 
       <div class="section-title">
+        <small>Biografia</small>
         <h3>Sobre</h3>
       </div>
 
@@ -977,6 +1126,7 @@
     <div class="container">
 
       <div class="section-title">
+        <small>Trajetória</small>
         <h3>Experiência</h3>
       </div>
 
@@ -1037,7 +1187,7 @@
            target="_blank">
 
           <div class="experience-image">
-            <img src="bonde.jpg" alt="">
+            <img src="IMG_5441.jpg" alt="">
           </div>
 
           <div class="experience-content">
@@ -1050,7 +1200,7 @@
             </span>
 
             <p>
-              Cena: <strong>A Revelação</strong>
+              Cena: <strong>O aniversário de Blanche</strong>
             </p>
 
           </div>
@@ -1121,48 +1271,23 @@
     <div class="container">
 
       <div class="section-title">
+        <small>Editorial</small>
         <h3>Galeria</h3>
       </div>
 
-      <div class="gallery-grid">
+      <ul id="galleryList" style="display:none;">
+        <li>IMG_128.jpg</li>
+        <li>IMG_5441.jpg</li>
+        <li>IMG_6725.jpg</li>
+        <li>reuniao.jpg</li>
+        <li>vestido.jpg</li>
+        <li>henrique.jpg</li>
+        <li>R2.jpg</li>
+        <li>R3.jpg</li>
+        <li>R4.jpg</li>
+      </ul>
 
-        <div class="gallery-item" onclick="openLightbox(0)">
-          <img src="IMG_128.jpg" alt="">
-        </div>
-
-        <div class="gallery-item" onclick="openLightbox(1)">
-          <img src="IMG_5441.jpg" alt="">
-        </div>
-
-        <div class="gallery-item" onclick="openLightbox(2)">
-          <img src="lucas.jpg" alt="">
-        </div>
-
-        <div class="gallery-item" onclick="openLightbox(3)">
-          <img src="reuniao.jpg" alt="">
-        </div>
-
-        <div class="gallery-item" onclick="openLightbox(4)">
-          <img src="vestido.jpg" alt="">
-        </div>
-
-        <div class="gallery-item" onclick="openLightbox(5)">
-          <img src="henrique.jpg" alt="">
-        </div>
-
-        <div class="gallery-item" onclick="openLightbox(5)">
-          <img src="R2.jpg" alt="">
-        </div>
-
-        <div class="gallery-item" onclick="openLightbox(5)">
-          <img src="R3.jpg" alt="">
-        </div>
-
-      <div class="gallery-item" onclick="openLightbox(5)">
-          <img src="R4.jpg" alt="">
-        </div>
-
-      </div>
+      <div class="gallery-grid" id="galleryGrid"></div>
 
     </div>
 
@@ -1179,7 +1304,11 @@
       <span class="lightbox-arrow left" onclick="prevImage()">‹</span>
       <span class="lightbox-arrow right" onclick="nextImage()">›</span>
 
-      <img id="lightbox-img" src="" alt="">
+      <div class="lightbox-counter" id="lightboxCounter">1 / 1</div>
+
+      <div class="lightbox-slider">
+        <img id="lightbox-img" src="" alt="">
+      </div>
 
     </div>
 
@@ -1192,6 +1321,7 @@
     <div class="container">
 
       <div class="section-title">
+        <small>Showreel</small>
         <h3>Vídeos</h3>
       </div>
 
@@ -1202,13 +1332,13 @@
            target="_blank">
 
           <div class="video-thumb">
-            <img src="bonde.jpg" alt="">
+            <img src="https://img.youtube.com/vi/GQAMliN1XeY/hqdefault.jpg" alt="">
             <div class="play-btn"><span>▶</span></div>
           </div>
 
           <div class="video-info">
             <small>Teatro</small>
-            <h4>O A Revelação</h4>
+            <h4>O Aniversário de Blanche</h4>
             <p>Um Bonde Chamado Desejo</p>
           </div>
 
@@ -1219,7 +1349,7 @@
            target="_blank">
 
           <div class="video-thumb">
-            <img src="IMG_6725.jpg" alt="">
+            <img src="IMG_5441.jpg" alt="">
             <div class="play-btn"><span>▶</span></div>
           </div>
 
@@ -1253,7 +1383,7 @@
            target="_blank">
 
           <div class="video-thumb">
-            <img src="vestido.jpg" alt="">
+            <img src="https://img.youtube.com/vi/GdWRDwFIPLM/hqdefault.jpg" alt="">
             <div class="play-btn"><span>▶</span></div>
           </div>
 
@@ -1305,39 +1435,73 @@
 
   </section>
 
-  <!-- FALE COMIGO -->
+  <!-- CONTATO -->
 
-  <section id="Fale Comigo">
+  <section id="contato">
 
     <div class="container">
 
       <div class="section-title">
+        <small>Contato</small>
         <h3>Fale Comigo</h3>
       </div>
 
       <div class="contact-box">
 
-        <p>
-          <strong>WhatsApp:</strong>
-          +55 11 98058-9009
-        </p>
+        <div class="contact-row">
 
-        <p>
-          <strong>E-mail:</strong>
-          <a href="mailto:henriquedileto@gmail.com">henriquedileto@gmail.com</a>
-        </p>
+          <a class="contact-item" href="https://wa.me/5511980589009" target="_blank">
+
+            <span class="contact-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+                <path d="M16.003 3C9.384 3 4 8.383 4 15.003c0 2.325.669 4.59 1.938 6.548L4 29l7.61-1.877a11.92 11.92 0 0 0 4.393.84h.005c6.618 0 12.002-5.383 12.002-12.003C28.01 8.383 22.626 3 16.003 3zm6.983 17.315c-.293.826-1.7 1.585-2.337 1.673-.608.085-1.378.12-2.22-.14-.51-.162-1.165-.38-2.01-.745-3.54-1.53-5.85-5.27-6.03-5.514-.175-.245-1.44-1.92-1.44-3.66 0-1.74.912-2.593 1.237-2.947.323-.354.705-.442.94-.442.235 0 .47.003.676.013.218.01.51-.084.798.61.294.708 1.005 2.448 1.093 2.627.087.177.145.384.03.62-.118.236-.176.384-.353.59-.176.206-.37.46-.528.62-.176.177-.36.37-.155.735.206.354.913 1.505 1.96 2.438 1.347 1.2 2.485 1.575 2.84 1.75.353.177.56.147.766-.088.206-.236.88-1.027 1.115-1.38.235-.354.47-.295.793-.177.323.118 2.04.962 2.393 1.14.353.177.588.265.676.413.088.147.088.854-.206 1.68z"/>
+              </svg>
+            </span>
+
+            <span class="contact-text">+55 11 98058-9009</span>
+
+          </a>
+
+          <a class="contact-item" href="mailto:henriquedileto@gmail.com">
+
+            <span class="contact-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/>
+              </svg>
+            </span>
+
+            <span class="contact-text">henriquedileto@gmail.com</span>
+
+          </a>
+
+        </div>
 
         <div class="socials">
 
-          <a href="https://instagram.com/henriquedileto" target="_blank">
+          <a class="social-link" href="https://instagram.com/henriquedileto" target="_blank">
+            <span class="social-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm10 2H7a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3zm-5 4a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6zm5.5-.9a1.1 1.1 0 1 1 0 2.2 1.1 1.1 0 0 1 0-2.2z"/>
+              </svg>
+            </span>
             Instagram
           </a>
 
-          <a href="https://x.com/henriquedileto" target="_blank">
+          <a class="social-link" href="https://x.com/henriquedileto" target="_blank">
+            <span class="social-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path d="M18.9 2H22l-6.8 7.8L23 22h-6.2l-4.8-6.5L6.4 22H2l7.4-8.6L1 2h6.4l4.3 5.8L18.9 2zm-1.1 18h1.7L7.5 4H5.7l12.1 16z"/>
+              </svg>
+            </span>
             X
           </a>
 
-          <a href="https://tiktok.com/@henriquedileto" target="_blank">
+          <a class="social-link" href="https://tiktok.com/@henriquedileto" target="_blank">
+            <span class="social-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path d="M16.5 2h-2.7v13.1c0 1.7-1.3 3-3 3s-3-1.3-3-3 1.3-3 3-3c.4 0 .7.1 1 .2V9.6c-.3-.1-.7-.1-1-.1-3.2 0-5.8 2.6-5.8 5.8S7.6 21 10.8 21s5.8-2.6 5.8-5.8V7.7c1.1 1.1 2.7 1.8 4.4 1.8V6.8c-2.5 0-4.5-2-4.5-4.5z"/>
+              </svg>
+            </span>
             TikTok
           </a>
 
@@ -1392,45 +1556,128 @@
       document.getElementById("menuOverlay").classList.remove("active");
     }
 
-    /* LIGHTBOX GALERIA */
-    const galleryImages = [
-      "IMG_128.jpg",
-      "IMG_5441.jpg",
-      "IMG_6725.jpg",
-      "reuniao.jpg",
-      "vestido.jpg",
-      "lucas.jpg",
-      "henrique.jpg"
-    ];
+    /* PREMIUM MOBILE: HEADER SOME AO ROLAR E FICA SÓ O BOTÃO ☰ */
+    window.addEventListener("scroll", function(){
 
+      const header = document.querySelector("header");
+      const floatingBtn = document.getElementById("floatingBtn");
+
+      if(window.innerWidth <= 850){
+
+        if(window.scrollY > 60){
+          header.classList.add("hide-header");
+          floatingBtn.style.opacity = "1";
+          floatingBtn.style.pointerEvents = "auto";
+        } else {
+          header.classList.remove("hide-header");
+          floatingBtn.style.opacity = "0";
+          floatingBtn.style.pointerEvents = "none";
+        }
+
+      }
+
+    });
+
+    window.addEventListener("load", function(){
+      const floatingBtn = document.getElementById("floatingBtn");
+      floatingBtn.style.opacity = "0";
+      floatingBtn.style.pointerEvents = "none";
+    });
+
+    /* GALERIA MAIS FÁCIL DE EDITAR */
+
+    const galleryListItems = document.querySelectorAll("#galleryList li");
+    const galleryGrid = document.getElementById("galleryGrid");
+
+    const galleryImages = Array.from(galleryListItems).map(li => li.textContent.trim());
+
+    galleryImages.forEach((imgName, index) => {
+      const div = document.createElement("div");
+      div.className = "gallery-item";
+      div.onclick = () => openLightbox(index);
+
+      const img = document.createElement("img");
+      img.src = imgName;
+
+      div.appendChild(img);
+      galleryGrid.appendChild(div);
+    });
+
+    /* LIGHTBOX */
     let currentImageIndex = 0;
+
+    function updateCounter(){
+      document.getElementById("lightboxCounter").textContent =
+        (currentImageIndex + 1) + " / " + galleryImages.length;
+    }
 
     function openLightbox(index){
       currentImageIndex = index;
       document.getElementById("lightbox-img").src = galleryImages[currentImageIndex];
       document.getElementById("lightbox").classList.add("active");
+      updateCounter();
     }
 
     function closeLightbox(){
       document.getElementById("lightbox").classList.remove("active");
     }
 
-    function nextImage(){
-      currentImageIndex++;
-      if(currentImageIndex >= galleryImages.length){
-        currentImageIndex = 0;
+    function changeImage(newIndex, direction){
+
+      const img = document.getElementById("lightbox-img");
+
+      if(direction === "next"){
+        img.classList.add("slide-out-left");
+      } else {
+        img.classList.add("slide-out-right");
       }
-      document.getElementById("lightbox-img").src = galleryImages[currentImageIndex];
+
+      setTimeout(() => {
+
+        currentImageIndex = newIndex;
+
+        if(currentImageIndex >= galleryImages.length){
+          currentImageIndex = 0;
+        }
+
+        if(currentImageIndex < 0){
+          currentImageIndex = galleryImages.length - 1;
+        }
+
+        img.src = galleryImages[currentImageIndex];
+        updateCounter();
+
+        img.classList.remove("slide-out-left");
+        img.classList.remove("slide-out-right");
+
+        void img.offsetWidth;
+
+        img.classList.add("slide-in");
+
+        setTimeout(() => {
+          img.classList.remove("slide-in");
+        }, 450);
+
+      }, 220);
+
+    }
+
+    function nextImage(){
+      changeImage(currentImageIndex + 1, "next");
     }
 
     function prevImage(){
-      currentImageIndex--;
-      if(currentImageIndex < 0){
-        currentImageIndex = galleryImages.length - 1;
-      }
-      document.getElementById("lightbox-img").src = galleryImages[currentImageIndex];
+      changeImage(currentImageIndex - 1, "prev");
     }
 
+    /* FECHAR AO CLICAR FORA */
+    document.getElementById("lightbox").addEventListener("click", function(e){
+      if(e.target.id === "lightbox"){
+        closeLightbox();
+      }
+    });
+
+    /* TECLADO DESKTOP */
     document.addEventListener("keydown", function(e){
 
       const lightbox = document.getElementById("lightbox");
@@ -1451,9 +1698,27 @@
 
     });
 
-    document.getElementById("lightbox").addEventListener("click", function(e){
-      if(e.target.id === "lightbox"){
-        closeLightbox();
+    /* SWIPE MOBILE */
+    const lightboxElement = document.getElementById("lightbox");
+
+    let startX = 0;
+    let endX = 0;
+
+    lightboxElement.addEventListener("touchstart", function(e){
+      startX = e.touches[0].clientX;
+    });
+
+    lightboxElement.addEventListener("touchend", function(e){
+      endX = e.changedTouches[0].clientX;
+
+      const diff = startX - endX;
+
+      if(Math.abs(diff) > 60){
+        if(diff > 0){
+          nextImage();
+        } else {
+          prevImage();
+        }
       }
     });
 
