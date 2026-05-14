@@ -1150,6 +1150,18 @@
           <img src="henrique.jpg" alt="">
         </div>
 
+        <div class="gallery-item" onclick="openLightbox(5)">
+          <img src="R2.jpg" alt="">
+        </div>
+
+        <div class="gallery-item" onclick="openLightbox(5)">
+          <img src="R3.jpg" alt="">
+        </div>
+
+      <div class="gallery-item" onclick="openLightbox(5)">
+          <img src="R4.jpg" alt="">
+        </div>
+
       </div>
 
     </div>
