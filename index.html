@@ -22,7 +22,7 @@
     body{
       background:#050505;
       color:white;
-      font-family:Helvetica, Helvetica, sans-serif;
+      font-family:Helvetica, Arial, sans-serif;
       overflow-x:hidden;
       line-height:1.7;
     }
@@ -79,18 +79,26 @@
       padding:22px 0;
     }
 
+    /* LOGO TOPO */
     .logo h1{
-      font-size:1.2rem;
+      font-size:1.1rem;
       letter-spacing:0.18em;
       text-transform:uppercase;
+      font-weight:600;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      flex-wrap:wrap;
     }
 
-    .logo p{
-      color:#8f8f8f;
-      margin-top:5px;
-      font-size:0.72rem;
-      letter-spacing:0.28em;
-      text-transform:uppercase;
+    .logo h1 .pipe{
+      color:#c93b2f;
+      font-weight:700;
+    }
+
+    .logo h1 .actor{
+      font-weight:300;
+      opacity:0.85;
     }
 
     nav{
@@ -292,7 +300,10 @@
       font-size:0.78rem;
     }
 
+    /* NOME MAIS REFINADO (HELVETICA STYLE) */
     .hero-text h2{
+      font-family:Helvetica, Arial, sans-serif;
+      font-weight:300;
       font-size:clamp(4rem,10vw,9rem);
       line-height:0.88;
       letter-spacing:-0.07em;
@@ -308,11 +319,19 @@
       line-height:1.9;
     }
 
+    /* BOTÕES LADO A LADO */
     .hero-buttons{
       display:flex;
       gap:18px;
       margin-top:45px;
-      flex-wrap:wrap;
+      flex-wrap:nowrap;
+      align-items:center;
+    }
+
+    @media(max-width:520px){
+      .hero-buttons{
+        flex-wrap:wrap;
+      }
     }
 
     /* BUTTONS */
@@ -324,6 +343,10 @@
       letter-spacing:0.15em;
       font-size:0.74rem;
       transition:0.3s;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-width:200px;
     }
 
     .btn-primary{
@@ -412,11 +435,12 @@
       position:relative;
     }
 
+    /* FOTO MAIS BEM RECORTADA (APARECER MAIS O PEITO) */
     .about-photo img{
       width:100%;
       height:100%;
       object-fit:cover;
-      object-position:center 10%;
+      object-position:center 30%;
     }
 
     .about-text p{
@@ -424,6 +448,14 @@
       margin-bottom:18px;
       font-size:1.05rem;
       max-width:620px;
+    }
+
+    /* NOME VERMELHO NO SOBRE */
+    .about-text medium{
+      color:#c93b2f;
+      font-weight:700;
+      letter-spacing:0.12em;
+      font-size:1.1rem;
     }
 
     .about-info{
@@ -630,6 +662,13 @@
       }
       .lightbox-arrow.right{
         right:10px;
+      }
+    }
+
+    /* MOBILE: TIRAR SETAS NA GALERIA */
+    @media(max-width:700px){
+      .lightbox-arrow{
+        display:none;
       }
     }
 
@@ -911,7 +950,7 @@
       }
 
       .about-photo img{
-        object-position:center 15%;
+        object-position:center 30%;
       }
 
       .about-info{
@@ -954,8 +993,11 @@
     <div class="container header-content">
 
       <div class="logo">
-        <h1>Henrique Dileto | Ator</h1>
-      
+        <h1>
+          Henrique Dileto
+          <span class="pipe">|</span>
+          <span class="actor">Ator</span>
+        </h1>
       </div>
 
       <nav>
@@ -1017,7 +1059,7 @@
 
       <div class="hero-text">
 
-        <small>Portfólio Artístico de </small>
+        <small>Portfólio Artístico de</small>
 
         <h2>
           Henrique<br>
@@ -1025,10 +1067,7 @@
         </h2>
 
         <p>
-          Ator de teatro e audiovisual 
-        </p>
-
-        <p>
+          Ator de teatro e audiovisual.
         </p>
 
         <div class="hero-buttons">
@@ -1072,39 +1111,39 @@
         </div>
 
         <div class="about-text">
-         <p>
-           <medium>HENRIQUE DILETO</medium>
-          <br>
-          <br>
-            É ator, com experiência em teatro e audiovisual.
-            Sua trajetória reúne montagens de textos clássicas e contemporâneas, explorando presença cênica,
-            expressão corporal e intensidade dramática. 
-            Seu repertório profissional também engloba trabalhos como palestrante e locutor.
-          </p>
 
           <p>
-
+            <medium>HENRIQUE DILETO</medium>
+            <br><br>
+            É ator, com experiência em teatro e audiovisual.
+            Sua trajetória reúne montagens de textos clássicas e contemporâneas, explorando presença cênica,
+            expressão corporal e intensidade dramática.
+            Seu repertório profissional também engloba trabalhos como palestrante e locutor.
           </p>
 
           <div class="about-info">
 
             <div class="info-box">
               <h4>Características físicas</h4>
-              <p><h5>Idade: 44 anos<h5>Etnia: Negro<br><h5>Altura: 1.83 cm<br><h5>Peso: 87 kg<br><h5>Natural de: São Paulo</p>
+              <p>
+                Idade: 44 anos<br>
+                Etnia: Negro<br>
+                Altura: 1.83 cm<br>
+                Peso: 87 kg<br>
+                Natural de: São Paulo
+              </p>
             </div>
-
-           
 
             <div class="info-box">
               <h4>Formação</h4>
               <p>Técnico em atuação - Teatro Escola Macunaíma</p>
-              <h4>Cursos</h4>
+
+              <h4 style="margin-top:16px;">Cursos</h4>
               <p>Teatro Contemporâneo - SP Escola de Teatro</p>
               <p>Oficina de iluminação cênica - Teatro Escola Macunaíma</p>
               <p>Atuação para audiovisual - Sesc Digital - EAD</p>
 
-
-               <h4>Idiomas:</h4>
+              <h4 style="margin-top:16px;">Idiomas</h4>
               <p>Português<br>Espanhol<br>Inglês</p>
             </div>
 
@@ -1274,11 +1313,9 @@
     <div class="container">
 
       <div class="section-title">
-       
         <h3>Galeria</h3>
       </div>
 
-      
       <ul id="galleryList" style="display:none;">
         <li>IMG_128.jpg</li>
         <li>IMG_5441.jpg</li>
@@ -1286,9 +1323,12 @@
         <li>reuniao.jpg</li>
         <li>vestido.jpg</li>
         <li>henrique.jpg</li>
-        <li>r2.jpg</li>
-        <li>r3.jpg</li>
-        <li>r4.jpg</li>
+
+        <li>henriquedileto_vestidodenoiva01.jpg</li>
+        <li>henriquedileto_vestidodenoiva02.jpg</li>
+        <li>henriquedileto_vestidodenoiva03.jpg</li>
+        <li>henriquedileto_vestidodenoiva04.jpg</li>
+        <li>henriquedileto_vestidodenoiva05.jpg</li>
       </ul>
 
       <div class="gallery-grid" id="galleryGrid"></div>
